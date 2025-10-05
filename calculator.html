@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitch Calculator</title>
+    <style>
+        input {
+            padding: 0.2em;
+        }
+    </style>
+</head>
+<body>
+    <fieldset>
+        <legend>Input</legend>
+        <label for="dist" type="Number" placeholder="Distance">Distance: </label>
+        <input id="dist">
+        <br/>
+        <label for="alt" type="Number" placeholder="Altitude">Altitude: </label>
+        <input id="alt">
+    </fieldset>
+    <h1 id="output">Output</h1>
+    <script>
+        const dist = document.getElementById("dist");
+        const alt = document.getElementById("alt");
+        const out = document.getElementById("output");
+
+        function calc() {
+            return Math.atan(Number(alt.value) / Number(dist.value));
+        }
+        function output() {
+            out.innerText = calc() + "°";
+        }
+
+        dist.addEventListener("change", output);
+        alt.addEventListener("change", output);
+
+        window.setInterval(output, 1000);
+    </script>
+</body>
+</html>
