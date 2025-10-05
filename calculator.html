@@ -26,7 +26,7 @@
         const out = document.getElementById("output");
 
         function calc() {
-            return Math.atan(Number(alt.value) / Number(dist.value));
+            return Math.atan(Number(alt.value) / Number(dist.value)) * 180 / Math.PI;
         }
         function output() {
             out.innerText = calc() + "°";
@@ -36,6 +36,7 @@
         alt.addEventListener("change", output);
 
         window.setInterval(output, 1000);
+        window.addEventListener("keyup", output); //only should work on compter
     </script>
 </body>
 </html>
