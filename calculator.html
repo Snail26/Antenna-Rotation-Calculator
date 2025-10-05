@@ -3,33 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pitch Calculator</title>
+    <title>Rotation Calculator</title>
     <style>
         input {
             padding: 0.2em;
         }
+        #input {
+            width: 25%;
+            display: block;
+            background-color: #efefef;
+            margin: 0;
+        }
+        #out {
+            display: block;
+            position: static;
+            width: 75%;
+            float: right;
+            border-color: black;
+            border-width: 1px;
+            text-align: center;
+            margin: 0;
+        }
+        #output {
+            font-size: xx-large;
+        }
     </style>
 </head>
 <body>
-    <fieldset>
-        <legend>Input</legend>
-        <label for="dist" type="Number" placeholder="Distance">Distance: </label>
-        <input id="dist">
+    <div id="input">
+        <label for="dist">Distance: </label>
+        <input id="dist" type="Number" placeholder="Distance">
         <br/>
-        <label for="alt" type="Number" placeholder="Altitude">Altitude: </label>
-        <input id="alt">
-    </fieldset>
-    <h1 id="output">Output</h1>
+        <label for="alt">Altitude: </label>
+        <input id="alt" type="Number" placeholder="Altitude">
+    </div>
+
+    <div id="out">
+        <p id="output">Output</p>
+    </div>
+    
     <script>
         const dist = document.getElementById("dist");
         const alt = document.getElementById("alt");
         const out = document.getElementById("output");
 
         function calc() {
-            return Math.atan(Number(alt.value) / Number(dist.value)) * 180 / Math.PI;
+            const a = Number(alt.value);
+            const d = Number(dist.value);
+            if (isNaN(a) || isNaN(d) || d === 0) return 0;
+            return(Math.atan(a / d) * (180 / Math.PI));
         }
         function output() {
-            out.innerText = calc() + "°";
+            out.innerText = "Pitch: " + Math.floor(calc()) + "°";
         }
 
         dist.addEventListener("change", output);
